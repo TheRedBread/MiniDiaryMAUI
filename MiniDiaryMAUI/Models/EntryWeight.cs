@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace MiniDiaryMAUI.Models;
 
-namespace MiniDiaryMAUI.Models;
-
-public class EntryWeight
+public class EntryWeight : BaseEntry
 {
     public double Weight { get; set; }
 }

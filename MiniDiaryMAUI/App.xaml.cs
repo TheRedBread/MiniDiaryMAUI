@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MiniDiaryMAUI.Services;
 
 namespace MiniDiaryMAUI
 {

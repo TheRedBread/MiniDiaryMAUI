@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MiniDiaryMAUI.Services;
 
 namespace MiniDiaryMAUI
 {
@@ -15,8 +16,11 @@ namespace MiniDiaryMAUI
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
+            builder.Services.AddSingleton<IEntriesService, EntriesService>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
