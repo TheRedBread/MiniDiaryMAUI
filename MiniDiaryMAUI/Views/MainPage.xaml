@@ -6,13 +6,13 @@
              x:Class="MiniDiaryMAUI.Views.MainPage"
              Title="MainPage">
     <VerticalStackLayout>
-        <Label 
-            Text="main page"
-            VerticalOptions="Center" 
+        <Button
+            Text="Weights"
+            Command="{Binding GoToWeightListPageCommand}"
             HorizontalOptions="Center" />
-        <Button Text="Go to Test Page"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                Command="{Binding GoToTestCommand}" />
+        <Button
+            Text="Notes"
+            Command="{Binding GoToNotesListPageCommand}"
+            HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>

@@ -4,8 +4,8 @@ using System.Text;
 
 namespace MiniDiaryMAUI.Models;
 
-public class BaseEntry
+public abstract class BaseEntry
 {
     public int Id { get; set; }
-    public DateTime dateTime { get; set; }
+    public DateTime DateTime { get; set; }
 }
