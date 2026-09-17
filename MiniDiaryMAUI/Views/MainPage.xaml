@@ -1,18 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodel="clr-namespace:MiniDiaryMAUI.ViewModel"
-             x:DataType="viewmodel:MainPageViewModel"
-             x:Class="MiniDiaryMAUI.Views.MainPage"
-             Title="MainPage">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MiniDiaryMAUI.Views.MainPage">
+
     <VerticalStackLayout>
         <Button
-            Text="Weights"
-            Command="{Binding GoToWeightListPageCommand}"
-            HorizontalOptions="Center" />
+            Text="{Binding WeightTileText}"
+            Command="{Binding OpenWeightCommand}" />
+
         <Button
-            Text="Notes"
-            Command="{Binding GoToNotesListPageCommand}"
-            HorizontalOptions="Center" />
+            Text="{Binding NotesTileText}"
+            Command="{Binding OpenNotesCommand}" />
     </VerticalStackLayout>
 </ContentPage>
