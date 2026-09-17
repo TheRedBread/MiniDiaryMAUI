@@ -1,4 +1,6 @@
-﻿namespace MiniDiaryMAUI
+﻿using MiniDiaryMAUI.Services;
+
+namespace MiniDiaryMAUI
 {
     public partial class App : Application
     {
