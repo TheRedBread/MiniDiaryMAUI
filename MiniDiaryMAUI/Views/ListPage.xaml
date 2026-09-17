@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MiniDiaryMAUI.ViewModel"
+             xmlns:models="clr-namespace:MiniDiaryMAUI.Models"
+             xmlns:local="clr-namespace:MiniDiaryMAUI.Views"
+             x:DataType="viewmodel:ListPageViewModel"
+             x:Class="MiniDiaryMAUI.Views.ListPage"
+             Title="ListPage">
+    <VerticalStackLayout>
+        <Label Text="notes" IsVisible="{Binding IsNotes}" HorizontalOptions="Center"/>
+        <Label Text="weights" IsVisible="{Binding IsWeights}" HorizontalOptions="Center"/>
+        <Button Text="Powrót"
+            Command="{Binding GoToMainPageCommand}"
+            HorizontalOptions="Center" />
+
+    </VerticalStackLayout>
+</ContentPage>
