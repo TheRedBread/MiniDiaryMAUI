@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace MiniDiaryMAUI
+﻿namespace MiniDiaryMAUI
 {
     public partial class App : Application
     {
