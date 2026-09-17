@@ -16,7 +16,7 @@ public class EntriesService : IEntriesService
         var entries = await _database.GetAllAsync<EntryWeight>();
 
         return entries
-            .OrderByDescending(x => x.dateTime)
+            .OrderByDescending(x => x.DateTime)
             .ToList();
     }
 
@@ -25,7 +25,7 @@ public class EntriesService : IEntriesService
         var entries = await _database.GetAllAsync<EntryNote>();
 
         return entries
-            .OrderByDescending(x => x.dateTime)
+            .OrderByDescending(x => x.DateTime)
             .ToList();
     }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using MiniDiaryMAUI.Services;
+using MiniDiaryMAUI.ViewModels;
 
 namespace MiniDiaryMAUI
 {
@@ -18,7 +19,6 @@ namespace MiniDiaryMAUI
 
             builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
             builder.Services.AddSingleton<IEntriesService, EntriesService>();
-
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

@@ -7,6 +7,7 @@ namespace MiniDiaryMAUI.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly IEntriesService _entriesService;
+
     [ObservableProperty]
     private string weightTileText = "Waga";
 
@@ -16,25 +17,48 @@ public partial class MainViewModel : ObservableObject
     public MainViewModel(IEntriesService entriesService)
     {
         _entriesService = entriesService;
-
-        LoadLatestEntries();
     }
-    private async void LoadLatestEntries()
+
+    public async Task LoadLatestEntriesAsync()
     {
-        var latestWeight = await _entriesService.GetLatestWeightAsync();
+        Console.WriteLine("LOAD LATEST ENTRIES STARTED");
 
-        if (latestWeight != null)
+        try
         {
-            WeightTileText =
-                $"Waga\n{latestWeight.Weight} kg · {latestWeight.dateTime}";
+            Console.WriteLine("GETTING WEIGHT...");
+
+            var latestWeight = await _entriesService.GetLatestWeightAsync();
+
+            Console.WriteLine("GET WEIGHT FINISHED");
+
+            if (latestWeight == null)
+            {
+                Console.WriteLine("NO WEIGHT FOUND");
+            }
+            else
+            {
+                Console.WriteLine(
+                    $"WEIGHT FOUND: {latestWeight.Weight}, {latestWeight.DateTime}");
+
+                WeightTileText =
+                    $"Waga\n{latestWeight.Weight} kg · {latestWeight.DateTime}";
+            }
+
+            Console.WriteLine("GETTING NOTE...");
+
+            var latestNote = await _entriesService.GetLatestNoteAsync();
+
+            Console.WriteLine("GET NOTE FINISHED");
+
+            if (latestNote != null)
+            {
+                NotesTileText =
+                    $"Notatki\n{latestNote.Text} · {latestNote.DateTime}";
+            }
         }
-
-        var latestNote = await _entriesService.GetLatestNoteAsync();
-
-        if (latestNote != null)
+        catch (Exception ex)
         {
-            NotesTileText =
-                $"Notatki\n{latestNote.Text} · {latestNote.dateTime}";
+            Console.WriteLine($"LOAD ERROR: {ex}");
         }
     }
 
