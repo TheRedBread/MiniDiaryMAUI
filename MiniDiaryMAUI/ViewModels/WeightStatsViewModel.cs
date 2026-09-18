@@ -3,7 +3,9 @@ using CommunityToolkit.Mvvm.Input;
 using LiveChartsCore;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
 using MiniDiaryMAUI.Services;
+using SkiaSharp;
 
 namespace MiniDiaryMAUI.ViewModels;
 
@@ -69,21 +71,26 @@ public partial class WeightStatsViewModel : ObservableObject
         Series =
         [
             new LineSeries<double>
-            {
-                Values = weights.Select(w => w.Weight).ToArray(),
-                Fill = null,
-                GeometrySize = 6,
-                LineSmoothness = 0.3
-            }
+        {
+            Values = weights.Select(w => w.Weight).ToArray(),
+            Stroke = new SolidColorPaint(SKColor.Parse("#BA5A31")) { StrokeThickness = 3 },
+            Fill = null,
+            GeometryStroke = new SolidColorPaint(SKColor.Parse("#BA5A31")) { StrokeThickness = 2 },
+            GeometryFill = new SolidColorPaint(SKColor.Parse("#F0BE9D")),
+            GeometrySize = 8,
+            LineSmoothness = 0.3
+        }
         ];
 
         XAxes =
         [
             new Axis
-            {
-                Labels = weights.Select(w => w.DateTime.ToString("dd.MM")).ToArray(),
-                LabelsRotation = 0
-            }
+        {
+            Labels = weights.Select(w => w.DateTime.ToString("dd.MM")).ToArray(),
+            LabelsRotation = 0,
+            TextSize = 11,
+            LabelsPaint = new SolidColorPaint(SKColor.Parse("#0C0C0C"))
+        }
         ];
 
         var values = weights.Select(w => w.Weight).ToList();

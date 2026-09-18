@@ -20,4 +20,9 @@ public partial class WeightStatsPage : ContentPage
         base.OnAppearing();
         await _viewModel.LoadAsync();
     }
+
+    private async void OnBackTapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("..");
+    }
 }
