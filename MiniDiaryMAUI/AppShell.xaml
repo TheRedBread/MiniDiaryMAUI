@@ -14,4 +14,8 @@
         Title="List"
         ContentTemplate="{DataTemplate local:ListPage}"
         Route="ListPage" />
+    <ShellContent
+        Title="Edit"
+        ContentTemplate="{DataTemplate local:EditPage}"
+        Route="EditPage" />
 </Shell>

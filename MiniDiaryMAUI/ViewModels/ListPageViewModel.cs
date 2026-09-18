@@ -6,12 +6,12 @@ using System.Collections.ObjectModel;
 
 namespace MiniDiaryMAUI.ViewModel;
 
-[QueryProperty(nameof(Mode), "mode")]
+[QueryProperty(nameof(ListMode), "listMode")]
 public partial class ListPageViewModel : ObservableObject
 {
     private readonly IEntriesService _entriesService;
     [ObservableProperty]
-    private string mode;
+    private string listMode;
 
     [ObservableProperty]
     private bool isNotes;
@@ -51,7 +51,7 @@ public partial class ListPageViewModel : ObservableObject
             }
         }
     }
-    partial void OnModeChanged(string value)
+    partial void OnListModeChanged(string value)
     {
         if (value == "notes")
         {
@@ -68,5 +68,15 @@ public partial class ListPageViewModel : ObservableObject
     private async Task GoToMainPage()
     {
         await Shell.Current.GoToAsync("//MainPage");
+    }
+    [RelayCommand]
+    private async Task AddEntry()
+    {
+       await Shell.Current.GoToAsync($"//EditPage");
+    }
+    [RelayCommand]
+    private async Task EditEntry(BaseEntry entry)
+    {
+        await Shell.Current.GoToAsync($"//EditPage?entryId={entry.Id}");
     }
 }

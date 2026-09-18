@@ -14,6 +14,7 @@
                     <VerticalStackLayout>
                         <Label Text="{Binding Weight}" FontAttributes="Bold" FontSize="Medium"/>
                         <Label Text="{Binding DateTime}" FontSize="Small"/>
+                        <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditEntryCommand}" CommandParameter="{Binding .}"/>
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -24,10 +25,12 @@
                     <VerticalStackLayout>
                         <Label Text="{Binding Text}" FontAttributes="Bold" FontSize="Medium"/>
                         <Label Text="{Binding DateTime}" FontSize="Small"/>
+                        <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditEntryCommand}" CommandParameter="{Binding .}"/>
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Text="MainPage" Command="{Binding GoToMainPageCommand}" HorizontalOptions="Center" />
+        <Button Text="MainPage" Command="{Binding GoToMainPageCommand}" HorizontalOptions="Center"/>
+        <Button Text="+" Command="{Binding AddEntryCommand}" HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>
