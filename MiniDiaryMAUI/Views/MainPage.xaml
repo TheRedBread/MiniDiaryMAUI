@@ -44,11 +44,11 @@
                             HorizontalOptions="Center">
 
                             <Label
-                                Text="{Binding WeightTileText}"
+                                Text="{Binding WeightValueText}"
                                 Style="{StaticResource DashboardValueStyle}" />
 
                             <Label
-                                Text="Wczoraj"
+                                Text="{Binding WeightDateText}"
                                 Style="{StaticResource DateLabelStyle}" />
 
                         </HorizontalStackLayout>
@@ -83,12 +83,13 @@
                             HorizontalOptions="Center">
 
                             <Label
-                                Text="{Binding NotesTileText}"
+                                Text="{Binding NotesValueText}"
                                 Style="{StaticResource DashboardValueStyle}" />
 
                             <Label
-                                Text="Wczoraj"
+                                Text="{Binding NotesDateText}"
                                 Style="{StaticResource DateLabelStyle}" />
+
 
                         </HorizontalStackLayout>
 
