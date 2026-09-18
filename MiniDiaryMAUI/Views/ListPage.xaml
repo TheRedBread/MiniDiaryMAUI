@@ -8,11 +8,29 @@
              x:Class="MiniDiaryMAUI.Views.ListPage"
              Title="ListPage">
     <VerticalStackLayout>
-        <Label Text="notes" IsVisible="{Binding IsNotes}" HorizontalOptions="Center"/>
-        <Label Text="weights" IsVisible="{Binding IsWeights}" HorizontalOptions="Center"/>
-        <Button Text="Powrót"
-            Command="{Binding GoToMainPageCommand}"
-            HorizontalOptions="Center" />
-
+        <CollectionView ItemsSource="{Binding ListWeights}" IsVisible="{Binding IsWeights}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:EntryWeight">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Weight}" FontAttributes="Bold" FontSize="Medium"/>
+                        <Label Text="{Binding DateTime}" FontSize="Small"/>
+                        <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditEntryCommand}" CommandParameter="{Binding .}"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <CollectionView ItemsSource="{Binding ListNotes}" IsVisible="{Binding IsNotes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:EntryNote">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Text}" FontAttributes="Bold" FontSize="Medium"/>
+                        <Label Text="{Binding DateTime}" FontSize="Small"/>
+                        <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditEntryCommand}" CommandParameter="{Binding .}"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="MainPage" Command="{Binding GoToMainPageCommand}" HorizontalOptions="Center"/>
+        <Button Text="+" Command="{Binding AddEntryCommand}" HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>
