@@ -92,6 +92,13 @@ internal partial class EditViewModel : ObservableObject
                     break;
             }
         }
+        else
+        {
+            InputDate = DateTime.Now;
+            InputTime = DateTime.Now.TimeOfDay;
+            InputDateTime = DateTime.Now;
+            InputText = string.Empty;
+        }
     }
 
     private IEntriesService _entriesService;
@@ -155,12 +162,12 @@ internal partial class EditViewModel : ObservableObject
         InputTime = DateTime.Now.TimeOfDay;
         InputDateTime = DateTime.Now;
         InputText = string.Empty;
-        await Shell.Current.GoToAsync("//Mainpage");
+        await Shell.Current.GoToAsync("//home");
     }
 
     [RelayCommand]
     private async Task GoToMainPage()
     {
-        await Shell.Current.GoToAsync("//MainPage");
+        await Shell.Current.GoToAsync("//home");
     }
 }

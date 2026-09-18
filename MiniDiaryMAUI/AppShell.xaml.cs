@@ -10,6 +10,6 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute(nameof(ListPage), typeof(ListPage));
         Routing.RegisterRoute(nameof(WeightStatsPage), typeof(WeightStatsPage));
-
+        Routing.RegisterRoute(nameof(EditPage), typeof(EditPage));
     }
 }
