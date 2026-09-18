@@ -7,11 +7,11 @@ namespace MiniDiaryMAUI.Views;
 public partial class EditPage : ContentPage
 {
 	private readonly EditViewModel _viewModel;
-    public EditPage(IDatabaseService databaseService)
+    public EditPage(IEntriesService entriesService)
 	{
 		InitializeComponent();
 
-        _viewModel = new EditViewModel(databaseService);
+        _viewModel = new EditViewModel(entriesService);
         BindingContext = _viewModel;
     }
 }

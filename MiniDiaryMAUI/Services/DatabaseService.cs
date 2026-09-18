@@ -21,10 +21,8 @@ public class DatabaseService : IDatabaseService
     {
         if (_initialized)
             return;
-        
         await _database.DropTableAsync<EntryNote>();
         await _database.DropTableAsync<EntryWeight>();
-
         await _database.CreateTableAsync<EntryNote>();
         await _database.CreateTableAsync<EntryWeight>();
 
@@ -62,7 +60,11 @@ public class DatabaseService : IDatabaseService
 
         return await _database.DeleteAsync(entity);
     }
-
+    public async Task<T> GetByIdAsync<T>(int id) where T : new()
+    {
+        await InitializeAsync();
+        return await _database.FindAsync<T>(id);
+    }
     private async Task SeedTestDataAsync()
     {
         var weights = await _database.Table<EntryWeight>().ToListAsync();

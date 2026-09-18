@@ -52,3 +52,32 @@ public class EntriesService : IEntriesService
             .ToList();
     }
 }
+    public async Task<EntryNote?> GetNoteByIdAsync(int id)
+    {
+        return await _database.GetByIdAsync<EntryNote>(id);
+    }
+    public async Task<EntryWeight?> GetWeightByIdAsync(int id)
+    {
+        return await _database.GetByIdAsync<EntryWeight>(id);
+    }
+    public async Task<EntryNote?> EditNoteAsync(EntryNote note)
+    {
+        await _database.UpdateAsync(note);
+        return note;
+    }
+    public async Task<EntryWeight?> EditWeightAsync(EntryWeight weight)
+    {
+        await _database.UpdateAsync(weight);
+        return weight;
+    }
+    public async Task<EntryNote?> InsertNoteAsync(EntryNote note)
+    {
+        await _database.InsertAsync(note);
+        return note;
+    }
+    public async Task<EntryWeight?> InsertWeightAsync(EntryWeight weight)
+    {
+        await _database.InsertAsync(weight);
+        return weight;
+    }
+}

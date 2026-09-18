@@ -6,7 +6,11 @@
              x:Class="MiniDiaryMAUI.Views.EditPage"
              Title="EditPage">
     <VerticalStackLayout>
-        <Label Text="{Binding EditId}" HorizontalOptions="Center"/>
+
         <Button Text="Back to Main Page" Command="{Binding GoToMainPageCommand}" HorizontalOptions="Center"/>
+        <Entry Text="{Binding InputText}" Placeholder="Enter input here" HorizontalOptions="Center"/>
+        <DatePicker Date="{Binding InputDate}" HorizontalOptions="Center"/>
+        <TimePicker Time="{Binding InputTime}" HorizontalOptions="Center"/>
+        <Button Text="Save" Command="{Binding SaveEntryCommand}" HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>
