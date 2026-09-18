@@ -1,64 +1,55 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MiniDiaryMAUI.Services;
+using MiniDiaryMAUI.Views;
+using System.Diagnostics;
 
 namespace MiniDiaryMAUI.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
     private readonly IEntriesService _entriesService;
+    private readonly IDateTimeFormatterService _dateTimeFormatterService;
 
     [ObservableProperty]
-    private string weightTileText = "Waga";
+    public partial string WeightValueText { get; set; } = "Brak danych";
 
     [ObservableProperty]
-    private string notesTileText = "Notatki";
+    public partial string WeightDateText { get; set; } = string.Empty;
 
-    public MainViewModel(IEntriesService entriesService)
+    [ObservableProperty]
+    public partial string NotesValueText { get; set; } = "Brak danych";
+
+    [ObservableProperty]
+    public partial string NotesDateText { get; set; } = string.Empty;
+
+    public MainViewModel(IEntriesService entriesService, IDateTimeFormatterService dateTimeFormatterService)
     {
         _entriesService = entriesService;
+        _dateTimeFormatterService = dateTimeFormatterService;
     }
 
     public async Task LoadLatestEntriesAsync()
     {
-        Console.WriteLine("LOAD LATEST ENTRIES STARTED");
-
         try
         {
-            Console.WriteLine("GETTING WEIGHT...");
-
             var latestWeight = await _entriesService.GetLatestWeightAsync();
-
-            Console.WriteLine("GET WEIGHT FINISHED");
-
-            if (latestWeight == null)
+            if (latestWeight != null)
             {
-                Console.WriteLine("NO WEIGHT FOUND");
+                WeightValueText = $"{latestWeight.Weight} kg";
+                WeightDateText = _dateTimeFormatterService.FormatRelative(latestWeight.DateTime);
             }
-            else
-            {
-                Console.WriteLine(
-                    $"WEIGHT FOUND: {latestWeight.Weight}, {latestWeight.DateTime}");
-
-                WeightTileText =
-                    $"Waga\n{latestWeight.Weight} kg · {latestWeight.DateTime}";
-            }
-
-            Console.WriteLine("GETTING NOTE...");
 
             var latestNote = await _entriesService.GetLatestNoteAsync();
-
-            Console.WriteLine("GET NOTE FINISHED");
-
             if (latestNote != null)
             {
-                NotesTileText =
-                    $"Notatki\n{latestNote.Text} · {latestNote.DateTime}";
+                NotesValueText = latestNote.Text;
+                NotesDateText = _dateTimeFormatterService.FormatRelative(latestNote.DateTime);
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"LOAD ERROR: {ex}");
+            Debug.WriteLine($"Failed to load latest entries: {ex}");
         }
     }
 

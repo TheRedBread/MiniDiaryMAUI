@@ -2,15 +2,108 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="MiniDiaryMAUI.Views.MainPage">
+    xmlns:controls="clr-namespace:MiniDiaryMAUI.Controls"
+    x:Class="MiniDiaryMAUI.Views.MainPage"
+    BackgroundColor="{StaticResource AppBackground}"
+    Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout>
-        <Button
-            Text="{Binding WeightTileText}"
-            Command="{Binding OpenWeightCommand}" />
+    <Grid RowDefinitions="*,Auto">
 
-        <Button
-            Text="{Binding NotesTileText}"
-            Command="{Binding OpenNotesCommand}" />
-    </VerticalStackLayout>
+        <!-- ========================= -->
+        <!-- Main content               -->
+        <!-- ========================= -->
+
+        <ScrollView Grid.Row="0">
+
+            <VerticalStackLayout
+                Padding="21,22,21,20"
+                Spacing="7">
+
+                <!-- WAGA -->
+                <Border
+                    Style="{StaticResource DashboardCardStyle}"
+                    HeightRequest="134">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding OpenWeightCommand}" />
+                    </Border.GestureRecognizers>
+
+                    <VerticalStackLayout
+                        Spacing="10"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+
+                        <Label
+                            Text="Waga"
+                            Style="{StaticResource DashboardTitleStyle}"
+                            HorizontalOptions="Center" />
+
+                        <HorizontalStackLayout
+                            Spacing="10"
+                            HorizontalOptions="Center">
+
+                            <Label
+                                Text="{Binding WeightValueText}"
+                                Style="{StaticResource DashboardValueStyle}" />
+
+                            <Label
+                                Text="{Binding WeightDateText}"
+                                Style="{StaticResource DateLabelStyle}" />
+
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+                <!-- NOTATKI -->
+                <Border
+                    Style="{StaticResource DashboardCardStyle}"
+                    HeightRequest="134">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding OpenNotesCommand}" />
+                    </Border.GestureRecognizers>
+
+                    <VerticalStackLayout
+                        Spacing="10"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center">
+
+                        <Label
+                            Text="Notatki"
+                            Style="{StaticResource DashboardTitleStyle}"
+                            HorizontalOptions="Center" />
+
+                        <HorizontalStackLayout
+                            Spacing="10"
+                            HorizontalOptions="Center">
+
+                            <Label
+                                Text="{Binding NotesValueText}"
+                                Style="{StaticResource DashboardValueStyle}" />
+
+                            <Label
+                                Text="{Binding NotesDateText}"
+                                Style="{StaticResource DateLabelStyle}" />
+
+
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <controls:BottomNavigation
+            Grid.Row="1" />
+        
+    </Grid>
+
 </ContentPage>

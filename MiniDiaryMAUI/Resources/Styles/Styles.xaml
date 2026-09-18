@@ -3,6 +3,162 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!-- ========================= -->
+    <!-- Colors                     -->
+    <!-- ========================= -->
+
+    <Color x:Key="AppBackground">#E59F71</Color>
+    <Color x:Key="CardBackground">#F0BE9D</Color>
+    <Color x:Key="Accent">#BA5A31</Color>
+    <Color x:Key="TextColor">#0C0C0C</Color>
+    <Color x:Key="IconColor">#553326</Color>
+    <Color x:Key="Mint">#69DC9E</Color>
+
+
+    <!-- ========================= -->
+    <!-- Dashboard card             -->
+    <!-- ========================= -->
+
+    <Style
+        x:Key="DashboardCardStyle"
+        TargetType="Border">
+
+        <Setter
+            Property="BackgroundColor"
+            Value="{StaticResource CardBackground}" />
+
+        <Setter
+            Property="Stroke"
+            Value="#C58C68" />
+
+        <Setter
+            Property="StrokeThickness"
+            Value="1" />
+
+        <Setter
+            Property="StrokeShape">
+
+            <Setter.Value>
+                <RoundRectangle CornerRadius="16" />
+            </Setter.Value>
+
+        </Setter>
+
+        <Setter
+            Property="Padding"
+            Value="20" />
+
+    </Style>
+
+
+    <!-- ========================= -->
+    <!-- Card title                 -->
+    <!-- ========================= -->
+
+    <Style
+        x:Key="DashboardTitleStyle"
+        TargetType="Label">
+
+        <Setter
+            Property="FontSize"
+            Value="27" />
+
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource TextColor}" />
+
+        <Setter
+            Property="HorizontalTextAlignment"
+            Value="Center" />
+
+        <Setter
+            Property="LineBreakMode"
+            Value="NoWrap" />
+
+        <Setter
+            Property="VerticalOptions"
+            Value="Center" />
+
+    </Style>
+
+
+    <!-- ========================= -->
+    <!-- Card value                 -->
+    <!-- ========================= -->
+
+    <Style
+        x:Key="DashboardValueStyle"
+        TargetType="Label">
+
+        <Setter
+            Property="FontSize"
+            Value="18" />
+
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource TextColor}" />
+
+        <Setter
+            Property="LineBreakMode"
+            Value="NoWrap" />
+
+    </Style>
+
+
+    <!-- ========================= -->
+    <!-- "Wczoraj"                  -->
+    <!-- ========================= -->
+
+    <Style
+        x:Key="DateLabelStyle"
+        TargetType="Label">
+
+        <Setter
+            Property="FontSize"
+            Value="12" />
+
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource Accent}" />
+
+        <Setter
+            Property="VerticalTextAlignment"
+            Value="Center" />
+
+    </Style>
+
+
+    <!-- ========================= -->
+    <!-- Bottom navigation icons    -->
+    <!-- ========================= -->
+
+    <Style
+        x:Key="NavigationIconStyle"
+        TargetType="ImageButton">
+
+        <Setter
+            Property="BackgroundColor"
+            Value="Transparent" />
+
+        <Setter
+            Property="Padding"
+            Value="10" />
+
+        <Setter
+            Property="Margin"
+            Value="0" />
+
+        <Setter
+            Property="Aspect"
+            Value="AspectFit" />
+
+        <Setter
+            Property="Opacity"
+            Value="1" />
+
+    </Style>
+
+
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>

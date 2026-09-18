@@ -19,6 +19,7 @@ namespace MiniDiaryMAUI
 
             builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
             builder.Services.AddSingleton<IEntriesService, EntriesService>();
+            builder.Services.AddSingleton<IDateTimeFormatterService, DateTimeFormatterService>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

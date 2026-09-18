@@ -6,12 +6,13 @@ namespace MiniDiaryMAUI.Views;
 public partial class MainPage : ContentPage
 {
     private readonly MainViewModel _viewModel;
+    private readonly IDateTimeFormatterService _dateTimeFormatterService;
 
-    public MainPage(IEntriesService entriesService)
+    public MainPage(IEntriesService entriesService, IDateTimeFormatterService dateTimeFormatterService)
     {
         InitializeComponent();
 
-        _viewModel = new MainViewModel(entriesService);
+        _viewModel = new MainViewModel(entriesService, dateTimeFormatterService);
         BindingContext = _viewModel;
     }
 

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net10.0-android</TargetFrameworks>
@@ -72,11 +72,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Services\" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\BottomNavigation.xaml">
 	  <MauiXaml Update="Views\EditPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
