@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MiniDiaryMAUI.Controls"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    x:Class="MiniDiaryMAUI.Views.WeightStatsPage"
+    BackgroundColor="{StaticResource AppBackground}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- ========================= -->
+        <!-- Main content               -->
+        <!-- ========================= -->
+
+        <ScrollView Grid.Row="0">
+
+            <VerticalStackLayout
+                Padding="21,22,21,20"
+                Spacing="7">
+
+                <!-- Header: back + title -->
+                <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,8">
+                    <Label
+                        Grid.Column="0"
+                        Text="←"
+                        FontSize="24"
+                        TextColor="{StaticResource TextColor}"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label
+                        Grid.Column="1"
+                        Text="Statystyki wagi"
+                        Style="{StaticResource DashboardTitleStyle}" />
+                </Grid>
+
+                <!-- RANGE TOGGLE -->
+                <Border
+                    Style="{StaticResource DashboardCardStyle}"
+                    Padding="10">
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+
+                        <Border
+                            Grid.Column="0"
+                            StrokeThickness="0"
+                            HeightRequest="40">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+
+                            <Border.Triggers>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsRange7Selected}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsRange7Selected}" Value="False">
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </DataTrigger>
+                            </Border.Triggers>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding SelectRangeCommand}"
+                                    CommandParameter="7" />
+                            </Border.GestureRecognizers>
+
+                            <Label
+                                Text="7 dni"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="14">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsRange7Selected}" Value="True">
+                                        <Setter Property="TextColor" Value="{StaticResource White}" />
+                                        <Setter Property="FontAttributes" Value="Bold" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsRange7Selected}" Value="False">
+                                        <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+                                        <Setter Property="FontAttributes" Value="None" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                        </Border>
+
+                        <Border
+                            Grid.Column="1"
+                            StrokeThickness="0"
+                            HeightRequest="40">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+
+                            <Border.Triggers>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsRange30Selected}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsRange30Selected}" Value="False">
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </DataTrigger>
+                            </Border.Triggers>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding SelectRangeCommand}"
+                                    CommandParameter="30" />
+                            </Border.GestureRecognizers>
+
+                            <Label
+                                Text="30 dni"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                FontSize="14">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsRange30Selected}" Value="True">
+                                        <Setter Property="TextColor" Value="{StaticResource White}" />
+                                        <Setter Property="FontAttributes" Value="Bold" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsRange30Selected}" Value="False">
+                                        <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+                                        <Setter Property="FontAttributes" Value="None" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                        </Border>
+
+                    </Grid>
+
+                </Border>
+
+                <!-- CHART -->
+                <Border
+                    Style="{StaticResource DashboardCardStyle}"
+                    HeightRequest="220">
+
+                    <lvc:CartesianChart
+                        Series="{Binding Series}"
+                        XAxes="{Binding XAxes}" />
+
+                </Border>
+
+                <!-- STATS -->
+                <Border
+                    Style="{StaticResource DashboardCardStyle}"
+                    HeightRequest="100">
+
+                    <Grid ColumnDefinitions="*,*,*">
+
+                        <VerticalStackLayout Grid.Column="0" Spacing="4" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="Min" Style="{StaticResource DateLabelStyle}" HorizontalOptions="Center" />
+                            <Label Text="{Binding MinWeightText}" Style="{StaticResource DashboardValueStyle}" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="Max" Style="{StaticResource DateLabelStyle}" HorizontalOptions="Center" />
+                            <Label Text="{Binding MaxWeightText}" Style="{StaticResource DashboardValueStyle}" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="2" Spacing="4" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="Średnia" Style="{StaticResource DateLabelStyle}" HorizontalOptions="Center" />
+                            <Label Text="{Binding AverageWeightText}" Style="{StaticResource DashboardValueStyle}" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+
+                    </Grid>
+
+                </Border>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <controls:BottomNavigation Grid.Row="1" />
+
+    </Grid>
+
+</ContentPage>
