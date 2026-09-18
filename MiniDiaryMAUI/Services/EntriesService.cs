@@ -51,7 +51,6 @@ public class EntriesService : IEntriesService
             .OrderBy(w => w.DateTime)
             .ToList();
     }
-}
     public async Task<EntryNote?> GetNoteByIdAsync(int id)
     {
         return await _database.GetByIdAsync<EntryNote>(id);
