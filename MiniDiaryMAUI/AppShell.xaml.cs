@@ -9,6 +9,8 @@ namespace MiniDiaryMAUI
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(ListPage), typeof(ListPage));
+            Routing.RegisterRoute(nameof(WeightStatsPage), typeof(WeightStatsPage));
+
 
         }
     }

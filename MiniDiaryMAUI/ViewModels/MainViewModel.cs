@@ -64,4 +64,10 @@ public partial class MainViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync($"{nameof(ListPage)}?mode=notes");
     }
+    [RelayCommand]
+    private async Task OpenStatistics()
+    {
+        await Shell.Current.GoToAsync($"{nameof(WeightStatsPage)}");
+    }
+
 }
