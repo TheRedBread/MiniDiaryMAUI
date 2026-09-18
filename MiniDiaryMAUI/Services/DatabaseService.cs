@@ -71,46 +71,53 @@ public class DatabaseService : IDatabaseService
 
         if (weights.Count == 0)
         {
-            await _database.InsertAsync(new EntryWeight
-            {
-                Weight = 82.5,
-                DateTime = DateTime.Now.AddDays(-2)
-            });
+            var random = new Random(42); // fixed seed for repeatable test data
+            var startingWeight = 84.0;
 
-            await _database.InsertAsync(new EntryWeight
+            for (var daysAgo = 30; daysAgo >= 0; daysAgo--)
             {
-                Weight = 81.9,
-                DateTime = DateTime.Now.AddDays(-1)
-            });
+                // small daily fluctuation with a slow downward trend
+                var drift = -0.03; // gradual loss per day on average
+                var noise = (random.NextDouble() - 0.5) * 0.6; // +/- 0.3 kg noise
 
-            await _database.InsertAsync(new EntryWeight
-            {
-                Weight = 81.4,
-                DateTime = DateTime.Now
-            });
+                startingWeight += drift + noise;
+
+                await _database.InsertAsync(new EntryWeight
+                {
+                    Weight = Math.Round(startingWeight, 1),
+                    DateTime = DateTime.Now.AddDays(-daysAgo)
+                });
+            }
         }
 
         var notes = await _database.Table<EntryNote>().ToListAsync();
 
         if (notes.Count == 0)
         {
-            await _database.InsertAsync(new EntryNote
+            var sampleNotes = new[]
             {
-                Text = "Started tracking my weight.",
-                DateTime = DateTime.Now.AddDays(-2)
-            });
+            "Started tracking my weight.",
+            "Feeling good today.",
+            "Went for a long walk.",
+            "Skipped breakfast, felt sluggish.",
+            "Great workout session.",
+            "Ate out, probably over my calories.",
+            "Slept well, feeling energized.",
+            "Stressful day at work.",
+            "Tried a new recipe, very healthy.",
+            "Rest day, took it easy."
+        };
 
-            await _database.InsertAsync(new EntryNote
+            for (var daysAgo = 28; daysAgo >= 0; daysAgo -= 3)
             {
-                Text = "Feeling good today.",
-                DateTime = DateTime.Now.AddDays(-1)
-            });
+                var note = sampleNotes[(28 - daysAgo) / 3 % sampleNotes.Length];
 
-            await _database.InsertAsync(new EntryNote
-            {
-                Text = "Went for a long walk.",
-                DateTime = DateTime.Now
-            });
+                await _database.InsertAsync(new EntryNote
+                {
+                    Text = note,
+                    DateTime = DateTime.Now.AddDays(-daysAgo)
+                });
+            }
         }
     }
 

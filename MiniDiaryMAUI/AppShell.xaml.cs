@@ -1,15 +1,15 @@
 ﻿using MiniDiaryMAUI.Views;
 
-namespace MiniDiaryMAUI
+namespace MiniDiaryMAUI;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            Routing.RegisterRoute(nameof(ListPage), typeof(ListPage));
+        Routing.RegisterRoute(nameof(ListPage), typeof(ListPage));
+        Routing.RegisterRoute(nameof(WeightStatsPage), typeof(WeightStatsPage));
 
-        }
     }
 }

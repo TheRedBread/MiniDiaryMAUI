@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Maui;
+using Microsoft.Extensions.Logging;
 using MiniDiaryMAUI.Services;
-using MiniDiaryMAUI.ViewModels;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MiniDiaryMAUI
 {
@@ -11,11 +14,17 @@ namespace MiniDiaryMAUI
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
+                .UseLiveCharts()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            LiveCharts.Configure(config => config
+                .AddSkiaSharp()
+                .AddDefaultMappers()
+                .AddLightTheme());
 
             builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
             builder.Services.AddSingleton<IEntriesService, EntriesService>();

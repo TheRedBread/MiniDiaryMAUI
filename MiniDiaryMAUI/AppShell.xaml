@@ -10,16 +10,8 @@
     Shell.NavBarIsVisible="False">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:MainPage}"
-        Route="MainPage" />
-    <ShellContent
-        Title="List"
-        ContentTemplate="{DataTemplate views:ListPage}"
-        Route="ListPage" />
-    <ShellContent
-        Title="Edit"
-        ContentTemplate="{DataTemplate views:EditPage}"
-        Route="EditPage" />
+        Route="home"
+        ContentTemplate="{DataTemplate views:MainPage}" />
+
 </Shell>
     

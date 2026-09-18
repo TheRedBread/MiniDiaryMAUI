@@ -37,10 +37,21 @@ public class EntriesService : IEntriesService
 
     public async Task<EntryNote?> GetLatestNoteAsync()
     {
-        Console.WriteLine("huh?");
         var entries = await GetNotesAsync();
         return entries.FirstOrDefault();
     }
+
+    public async Task<List<EntryWeight>> GetWeightsSinceAsync(int days)
+    {
+        var cutoff = DateTime.Now.AddDays(-days);
+        var entries = await _database.GetAllAsync<EntryWeight>();
+
+        return entries
+            .Where(w => w.DateTime >= cutoff)
+            .OrderBy(w => w.DateTime)
+            .ToList();
+    }
+}
     public async Task<EntryNote?> GetNoteByIdAsync(int id)
     {
         return await _database.GetByIdAsync<EntryNote>(id);

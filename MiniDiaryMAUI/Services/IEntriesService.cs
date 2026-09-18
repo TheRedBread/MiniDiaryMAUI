@@ -9,6 +9,7 @@ public interface IEntriesService
 
     Task<EntryWeight?> GetLatestWeightAsync();
     Task<EntryNote?> GetLatestNoteAsync();
+    Task<List<EntryWeight>> GetWeightsSinceAsync(int days);
 
     Task<EntryNote?> GetNoteByIdAsync(int id);
     Task<EntryWeight?> GetWeightByIdAsync(int id);

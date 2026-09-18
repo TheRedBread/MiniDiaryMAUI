@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MiniDiaryMAUI.Models;
 using MiniDiaryMAUI.Services;
+using MiniDiaryMAUI.Views;
 using System.Collections.ObjectModel;
 
 namespace MiniDiaryMAUI.ViewModel;
