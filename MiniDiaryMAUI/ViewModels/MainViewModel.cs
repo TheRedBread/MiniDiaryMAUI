@@ -56,13 +56,13 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private async Task OpenWeight()
     {
-        await Shell.Current.GoToAsync("//ListPage?listMode=weights");
+        await Shell.Current.GoToAsync($"{nameof(ListPage)}?listMode=weights");
     }
 
     [RelayCommand]
     private async Task OpenNotes()
     {
-        await Shell.Current.GoToAsync("//ListPage?listMode=notes");
+        await Shell.Current.GoToAsync($"{nameof(ListPage)}?listMode=notes");
     }
     [RelayCommand]
     private async Task OpenStatistics()

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MiniDiaryMAUI.Models;
 using MiniDiaryMAUI.Services;
+using MiniDiaryMAUI.Views;
 using System.Collections.ObjectModel;
 
 namespace MiniDiaryMAUI.ViewModel;
@@ -67,16 +68,16 @@ public partial class ListPageViewModel : ObservableObject
     [RelayCommand]
     private async Task GoToMainPage()
     {
-        await Shell.Current.GoToAsync("//home");
+        await Shell.Current.GoToAsync($"{nameof(MainPage)}");
     }
     [RelayCommand]
     private async Task AddEntry()
     {
-       await Shell.Current.GoToAsync($"//EditPage");
+       await Shell.Current.GoToAsync($"{nameof(EditPage)}");
     }
     [RelayCommand]
     private async Task EditEntry(BaseEntry entry)
     {
-        await Shell.Current.GoToAsync($"//EditPage?entryId={entry.Id}");
+        await Shell.Current.GoToAsync($"{nameof(EditPage)}?entryId={entry.Id}");
     }
 }
