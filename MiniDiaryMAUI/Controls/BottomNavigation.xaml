@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MiniDiaryMAUI.Controls.BottomNavigation">
+
+    <Border
+        HeightRequest="47"
+        BackgroundColor="{StaticResource CardBackground}"
+        StrokeThickness="0">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="16,16,0,0" />
+        </Border.StrokeShape>
+
+        <Grid
+            ColumnDefinitions="*,*,*,*,*"
+            Padding="5,0">
+
+            <ImageButton
+                Grid.Column="0"
+                Source="home.png"
+                Style="{StaticResource NavigationIconStyle}"
+                Clicked="OnHomeClicked" />
+
+            <ImageButton
+                Grid.Column="1"
+                Source="calendar.png"
+                Style="{StaticResource NavigationIconStyle}"
+                Clicked="OnCalendarClicked" />
+
+            <ImageButton
+                Grid.Column="2"
+                Source="add.png"
+                Style="{StaticResource NavigationIconStyle}"
+                Clicked="OnAddClicked" />
+
+            <ImageButton
+                Grid.Column="3"
+                Source="bell.png"
+                Style="{StaticResource NavigationIconStyle}"
+                Clicked="OnNotificationsClicked" />
+
+            <ImageButton
+                Grid.Column="4"
+                Source="user.png"
+                Style="{StaticResource NavigationIconStyle}"
+                Clicked="OnProfileClicked" />
+
+        </Grid>
+
+    </Border>
+
+</ContentView>
