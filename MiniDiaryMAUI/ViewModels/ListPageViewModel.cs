@@ -67,16 +67,21 @@ public partial class ListPageViewModel : ObservableObject
     [RelayCommand]
     private async Task GoToMainPage()
     {
-        await Shell.Current.GoToAsync("//home");
+        await Shell.Current.GoToAsync("//MainPage");
     }
     [RelayCommand]
     private async Task AddEntry()
     {
-       await Shell.Current.GoToAsync($"//EditPage");
+       await Shell.Current.GoToAsync($"//EditPage?entryId={null}&editMode=notes");
     }
     [RelayCommand]
-    private async Task EditEntry(BaseEntry entry)
+    private async Task EditWeightEntry(EntryWeight entryWeight)
     {
-        await Shell.Current.GoToAsync($"//EditPage?entryId={entry.Id}");
+        await Shell.Current.GoToAsync($"//EditPage?entryId={entryWeight.Id}&editMode=weights");
+    }
+    [RelayCommand]
+    private async Task EditNoteEntry(EntryNote entryNote)
+    {
+        await Shell.Current.GoToAsync($"//EditPage?entryId={entryNote.Id}&editMode=notes");
     }
 }

@@ -5,19 +5,21 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:MiniDiaryMAUI.Views"
+    xmlns:local="clr-namespace:MiniDiaryMAUI"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate views:MainPage}"
         Route="MainPage" />
     <ShellContent
         Title="List"
-        ContentTemplate="{DataTemplate local:ListPage}"
+        ContentTemplate="{DataTemplate views:ListPage}"
         Route="ListPage" />
     <ShellContent
         Title="Edit"
-        ContentTemplate="{DataTemplate local:EditPage}"
+        ContentTemplate="{DataTemplate views:EditPage}"
         Route="EditPage" />
 </Shell>
+    

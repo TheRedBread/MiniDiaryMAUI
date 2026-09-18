@@ -11,4 +11,6 @@ public interface IDatabaseService
     Task<int> UpdateAsync<T>(T entity) where T : new();
 
     Task<int> DeleteAsync<T>(T entity) where T : new();
+
+    Task<T> GetByIdAsync<T>(int id) where T : new();
 }
