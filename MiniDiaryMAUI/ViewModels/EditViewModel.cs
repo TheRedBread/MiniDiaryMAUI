@@ -35,15 +35,34 @@ internal partial class EditViewModel : ObservableObject
     [ObservableProperty]
     private DateTime inputDateTime;
 
+    public bool IsNoteEntry => CurrentEntryType == entryType.Notes;
+    public bool IsWeightEntry => CurrentEntryType == entryType.Weights;
+
+    /// <summary>
+    /// Type can only be switched while creating a new entry, not while editing an existing one.
+    /// </summary>
+    public bool CanChangeEntryType => !IsEditMode;
+
+    public string PageTitle => (IsEditMode, IsNoteEntry) switch
+    {
+        (true, true) => "Edytuj notatkę",
+        (true, false) => "Edytuj wagę",
+        (false, true) => "Nowa notatka",
+        (false, false) => "Nowa waga"
+    };
+
     partial void OnEditModeChanged(string value)
     {
-        currentEntryType = value == "notes" ? entryType.Notes : entryType.Weights;
+        CurrentEntryType = value == "notes" ? entryType.Notes : entryType.Weights;
+        OnPropertyChanged(nameof(IsNoteEntry));
+        OnPropertyChanged(nameof(IsWeightEntry));
+        OnPropertyChanged(nameof(PageTitle));
     }
 
     partial void OnEntryIdChanged(string value)
     {
-       bool doesEntryExist = false;
-        switch (currentEntryType)
+        bool doesEntryExist = false;
+        switch (CurrentEntryType)
         {
             case entryType.Notes:
                 if (_entriesService.GetNoteByIdAsync(int.TryParse(value, out int noteId2) ? noteId2 : 0) != null)
@@ -58,23 +77,20 @@ internal partial class EditViewModel : ObservableObject
                 }
                 break;
         }
-        if (!doesEntryExist || string.IsNullOrEmpty(value))
-        {
-            isEditMode = false;
-        }
-        else
-        {
-            IsEditMode = true;
 
-            _ = LoadEntryAsync();
-        }
+        IsEditMode = doesEntryExist && !string.IsNullOrEmpty(value);
 
+        _ = LoadEntryAsync();
+
+        OnPropertyChanged(nameof(PageTitle));
+        OnPropertyChanged(nameof(CanChangeEntryType));
     }
+
     private async Task LoadEntryAsync()
     {
         if (IsEditMode)
         {
-            switch (currentEntryType)
+            switch (CurrentEntryType)
             {
                 case entryType.Notes:
                     var note = await _entriesService.GetNoteByIdAsync(int.TryParse(EntryId, out int noteId) ? noteId : 0);
@@ -108,9 +124,29 @@ internal partial class EditViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void SelectEntryType(string typeParam)
+    {
+        if (IsEditMode)
+            return; // locked once editing an existing entry
+
+        var newType = typeParam == "notes" ? entryType.Notes : entryType.Weights;
+        if (newType == CurrentEntryType)
+            return;
+
+        CurrentEntryType = newType;
+
+        // clear the value field since a weight number and note text aren't interchangeable
+        InputText = string.Empty;
+
+        OnPropertyChanged(nameof(IsNoteEntry));
+        OnPropertyChanged(nameof(IsWeightEntry));
+        OnPropertyChanged(nameof(PageTitle));
+    }
+
+    [RelayCommand]
     private async Task SaveEntry()
     {
-        switch(currentEntryType)
+        switch (CurrentEntryType)
         {
             case entryType.Notes:
                 if (IsEditMode)
@@ -150,7 +186,8 @@ internal partial class EditViewModel : ObservableObject
                 else
                 {
                     InputDateTime = InputDate.Date + InputTime;
-                    var newWeight = new EntryWeight {
+                    var newWeight = new EntryWeight
+                    {
                         Weight = double.Parse(InputText),
                         DateTime = InputDateTime
                     };
@@ -158,6 +195,7 @@ internal partial class EditViewModel : ObservableObject
                 }
                 break;
         }
+
         InputDate = DateTime.Now;
         InputTime = DateTime.Now.TimeOfDay;
         InputDateTime = DateTime.Now;

@@ -68,7 +68,7 @@ public partial class ListPageViewModel : ObservableObject
     [RelayCommand]
     private async Task GoToMainPage()
     {
-        await Shell.Current.GoToAsync("home");
+        await Shell.Current.GoToAsync("//home");
     }
     [RelayCommand]
     private async Task AddEntry()

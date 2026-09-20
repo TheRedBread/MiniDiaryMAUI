@@ -1,3 +1,5 @@
+using MiniDiaryMAUI.Views;
+
 namespace MiniDiaryMAUI.Controls;
 
 public partial class BottomNavigation : ContentView
@@ -19,7 +21,7 @@ public partial class BottomNavigation : ContentView
 
     private async void OnAddClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("add");
+        await Shell.Current.GoToAsync($"{nameof(EditPage)}?entryId={null}&editMode=notes");
     }
 
     private async void OnNotificationsClicked(object sender, EventArgs e)

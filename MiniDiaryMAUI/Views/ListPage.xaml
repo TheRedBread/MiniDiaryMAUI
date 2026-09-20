@@ -1,38 +1,184 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodel="clr-namespace:MiniDiaryMAUI.ViewModel"
-             xmlns:models="clr-namespace:MiniDiaryMAUI.Models"
-             xmlns:local="clr-namespace:MiniDiaryMAUI.Views"
-             x:DataType="viewmodel:ListPageViewModel"
-             x:Class="MiniDiaryMAUI.Views.ListPage"
-             Title="ListPage">
-    <VerticalStackLayout>
-        <CollectionView ItemsSource="{Binding ListWeights}" IsVisible="{Binding IsWeights}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:EntryWeight">
-                    <VerticalStackLayout>
-                        <Label Text="{Binding Weight}" FontAttributes="Bold" FontSize="Medium"/>
-                        <Label Text="{Binding DateTime}" FontSize="Small"/>
-						<Label Text="{Binding Id}" FontSize="Subtitle"/>
-                        <Button Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditWeightEntryCommand}" CommandParameter="{Binding .}" Text="Edit"/>
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <CollectionView ItemsSource="{Binding ListNotes}" IsVisible="{Binding IsNotes}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:EntryNote">
-                    <VerticalStackLayout>
-                        <Label Text="{Binding Text}" FontAttributes="Bold" FontSize="Medium"/>
-                        <Label Text="{Binding DateTime}" FontSize="Small"/>
-                        <Label Text="{Binding Id}" FontSize="Subtitle"/>
-                        <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditNoteEntryCommand}" CommandParameter="{Binding .}"/>
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button Text="MainPage" Command="{Binding GoToMainPageCommand}" HorizontalOptions="Center"/>
-        <Button Text="+" Command="{Binding AddEntryCommand}" HorizontalOptions="Center"/>
-    </VerticalStackLayout>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:MiniDiaryMAUI.ViewModel"
+    xmlns:models="clr-namespace:MiniDiaryMAUI.Models"
+    xmlns:controls="clr-namespace:MiniDiaryMAUI.Controls"
+    x:DataType="viewmodel:ListPageViewModel"
+    x:Class="MiniDiaryMAUI.Views.ListPage"
+    BackgroundColor="{StaticResource AppBackground}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- ========================= -->
+        <!-- Main content               -->
+        <!-- ========================= -->
+
+        <ScrollView Grid.Row="0">
+
+            <VerticalStackLayout
+                Padding="21,22,21,20"
+                Spacing="7">
+
+                <!-- Header: back + title + add -->
+                <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,8">
+
+                    <Label
+                        Grid.Column="0"
+                        Text="←"
+                        FontSize="24"
+                        TextColor="{StaticResource TextColor}"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToMainPageCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label
+                        Grid.Column="1"
+                        Text="Waga"
+                        IsVisible="{Binding IsWeights}"
+                        Style="{StaticResource DashboardTitleStyle}" />
+
+                    <Label
+                        Grid.Column="1"
+                        Text="Notatki"
+                        IsVisible="{Binding IsNotes}"
+                        Style="{StaticResource DashboardTitleStyle}" />
+
+                    <Label
+                        Grid.Column="2"
+                        Text="+"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource Accent}"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddEntryCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </Grid>
+
+                <!-- WEIGHTS -->
+                <CollectionView
+                    ItemsSource="{Binding ListWeights}"
+                    IsVisible="{Binding IsWeights}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="7" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.EmptyView>
+                        <Label
+                            Text="Brak wpisów wagi"
+                            TextColor="{StaticResource TextColor}"
+                            HorizontalOptions="Center"
+                            Margin="0,30,0,0" />
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:EntryWeight">
+                            <Border Style="{StaticResource DashboardCardStyle}">
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditWeightEntryCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+
+                                <Grid ColumnDefinitions="*,Auto">
+
+                                    <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                        <Label
+                                            Text="{Binding Weight, StringFormat='{0} kg'}"
+                                            Style="{StaticResource DashboardValueStyle}"
+                                            FontAttributes="Bold" />
+
+                                        <Label
+                                            Text="{Binding DateTime, StringFormat='{0:dd.MM.yyyy, HH:mm}'}"
+                                            Style="{StaticResource DateLabelStyle}" />
+                                    </VerticalStackLayout>
+
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="›"
+                                        FontSize="22"
+                                        TextColor="{StaticResource Accent}"
+                                        VerticalOptions="Center" />
+
+                                </Grid>
+
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+                <!-- NOTES -->
+                <CollectionView
+                    ItemsSource="{Binding ListNotes}"
+                    IsVisible="{Binding IsNotes}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="7" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.EmptyView>
+                        <Label
+                            Text="Brak notatek"
+                            TextColor="{StaticResource TextColor}"
+                            HorizontalOptions="Center"
+                            Margin="0,30,0,0" />
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:EntryNote">
+                            <Border Style="{StaticResource DashboardCardStyle}">
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditNoteEntryCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+
+                                <Grid ColumnDefinitions="*,Auto">
+
+                                    <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                        <Label
+                                            Text="{Binding Text}"
+                                            Style="{StaticResource DashboardValueStyle}"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="2" />
+
+                                        <Label
+                                            Text="{Binding DateTime, StringFormat='{0:dd.MM.yyyy, HH:mm}'}"
+                                            Style="{StaticResource DateLabelStyle}" />
+                                    </VerticalStackLayout>
+
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="›"
+                                        FontSize="22"
+                                        TextColor="{StaticResource Accent}"
+                                        VerticalOptions="Center" />
+
+                                </Grid>
+
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <controls:BottomNavigation Grid.Row="1" />
+
+    </Grid>
+
 </ContentPage>
