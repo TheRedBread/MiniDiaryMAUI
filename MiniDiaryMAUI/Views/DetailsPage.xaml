@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MiniDiaryMAUI.ViewModels"
+    xmlns:controls="clr-namespace:MiniDiaryMAUI.Controls"
+    x:DataType="viewmodels:DetailsViewModel"
+    x:Class="MiniDiaryMAUI.Views.DetailsPage"
+    BackgroundColor="{StaticResource AppBackground}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView Grid.Row="0">
+
+            <VerticalStackLayout Padding="21,22,21,20" Spacing="7">
+
+                <!-- Header -->
+                <Grid ColumnDefinitions="Auto,*" Margin="0,0,0,8">
+                    <Label
+                        Grid.Column="0"
+                        Text="←"
+                        FontSize="24"
+                        TextColor="{StaticResource TextColor}"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoBackCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label
+                        Grid.Column="1"
+                        Text="Szczegóły"
+                        Style="{StaticResource DashboardTitleStyle}" />
+                </Grid>
+
+                <!-- Content card -->
+                <Border Style="{StaticResource DashboardCardStyle}" MinimumHeightRequest="160">
+
+                    <VerticalStackLayout Spacing="16" VerticalOptions="Center">
+
+                        <Label
+                            Text="{Binding ValueText}"
+                            Style="{StaticResource DashboardValueStyle}"
+                            FontSize="24"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            LineBreakMode="WordWrap" />
+
+                        <BoxView HeightRequest="1" Color="#C58C68" Opacity="0.5" />
+
+                        <Label
+                            Text="{Binding DateText}"
+                            Style="{StaticResource DateLabelStyle}"
+                            HorizontalOptions="Center" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <!-- Edit CTA -->
+                <Border
+                    BackgroundColor="{StaticResource Accent}"
+                    StrokeThickness="0"
+                    HeightRequest="52"
+                    Margin="0,7,0,0">
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EditThisEntryCommand}" />
+                    </Border.GestureRecognizers>
+
+                    <Label
+                        Text="Edytuj"
+                        TextColor="{StaticResource White}"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+
+                </Border>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <controls:BottomNavigation Grid.Row="1" />
+
+    </Grid>
+
+</ContentPage>
