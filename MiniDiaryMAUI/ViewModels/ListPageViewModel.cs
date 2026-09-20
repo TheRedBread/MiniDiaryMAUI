@@ -11,6 +11,7 @@ namespace MiniDiaryMAUI.ViewModel;
 public partial class ListPageViewModel : ObservableObject
 {
     private readonly IEntriesService _entriesService;
+
     [ObservableProperty]
     private string listMode;
 
@@ -30,18 +31,19 @@ public partial class ListPageViewModel : ObservableObject
     {
         _entriesService = entriesService;
     }
+
     public async Task LoadAllEntriesAsync()
     {
         var allWeights = await _entriesService.GetWeightsAsync();
         if (allWeights != null)
         {
-
             ListWeights = new ObservableCollection<EntryWeight>();
             foreach (var weight in allWeights)
             {
                 ListWeights.Add(weight);
             }
         }
+
         var allNotes = await _entriesService.GetNotesAsync();
         if (allNotes != null)
         {
@@ -52,6 +54,7 @@ public partial class ListPageViewModel : ObservableObject
             }
         }
     }
+
     partial void OnListModeChanged(string value)
     {
         if (value == "notes")
@@ -65,24 +68,40 @@ public partial class ListPageViewModel : ObservableObject
             IsWeights = true;
         }
     }
+
     [RelayCommand]
     private async Task GoToMainPage()
     {
         await Shell.Current.GoToAsync("//home");
     }
+
     [RelayCommand]
     private async Task AddEntry()
     {
-       await Shell.Current.GoToAsync($"{nameof(EditPage)}?entryId={null}&editMode=notes");
+        await Shell.Current.GoToAsync($"{nameof(EditPage)}?entryId={null}&editMode=notes");
     }
+
     [RelayCommand]
     private async Task EditWeightEntry(EntryWeight entryWeight)
     {
         await Shell.Current.GoToAsync($"{nameof(EditPage)}?entryId={entryWeight.Id}&editMode=weights");
     }
+
     [RelayCommand]
     private async Task EditNoteEntry(EntryNote entryNote)
     {
         await Shell.Current.GoToAsync($"{nameof(EditPage)}?entryId={entryNote.Id}&editMode=notes");
+    }
+
+    [RelayCommand]
+    private async Task ViewWeightDetails(EntryWeight entryWeight)
+    {
+        await Shell.Current.GoToAsync($"{nameof(DetailsPage)}?entryId={entryWeight.Id}&entryMode=weights");
+    }
+
+    [RelayCommand]
+    private async Task ViewNoteDetails(EntryNote entryNote)
+    {
+        await Shell.Current.GoToAsync($"{nameof(DetailsPage)}?entryId={entryNote.Id}&entryMode=notes");
     }
 }
