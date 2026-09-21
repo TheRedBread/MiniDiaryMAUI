@@ -80,62 +80,74 @@
                     </CollectionView.EmptyView>
 
                     <CollectionView.ItemTemplate>
+                        <!-- WEIGHTS ItemTemplate -->
                         <DataTemplate x:DataType="models:EntryWeight">
                             <Border Style="{StaticResource DashboardCardStyle}">
 
-                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                                <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="6">
 
                                     <VerticalStackLayout Grid.Column="0" Spacing="4">
                                         <Label
-                                            Text="{Binding Weight, StringFormat='{0} kg'}"
-                                            Style="{StaticResource DashboardValueStyle}"
-                                            FontAttributes="Bold" />
+                    Text="{Binding Weight, StringFormat='{0} kg'}"
+                    Style="{StaticResource DashboardValueStyle}"
+                    FontAttributes="Bold" />
 
                                         <Label
-                                            Text="{Binding DateTime, StringFormat='{0:dd.MM.yyyy, HH:mm}'}"
-                                            Style="{StaticResource DateLabelStyle}" />
+                    Text="{Binding DateTime, StringFormat='{0:dd.MM.yyyy, HH:mm}'}"
+                    Style="{StaticResource DateLabelStyle}" />
                                     </VerticalStackLayout>
 
                                     <Border
-                                        Grid.Column="1"
-                                        BackgroundColor="Transparent"
-                                        Stroke="{StaticResource Accent}"
-                                        StrokeThickness="1.5"
-                                        Padding="12,6"
-                                        VerticalOptions="Center">
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Stroke="{StaticResource Accent}"
+                StrokeThickness="1.5"
+                Padding="10,6"
+                VerticalOptions="Center">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="10" />
                                         </Border.StrokeShape>
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=ViewWeightDetailsCommand}"
-                                                CommandParameter="{Binding .}" />
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=ViewWeightDetailsCommand}"
+                        CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
-                                        <Label
-                                            Text="Szczegóły"
-                                            FontSize="12"
-                                            TextColor="{StaticResource Accent}" />
+                                        <Label Text="Szczegóły" FontSize="12" TextColor="{StaticResource Accent}" />
                                     </Border>
 
                                     <Border
-                                        Grid.Column="2"
-                                        BackgroundColor="{StaticResource Accent}"
-                                        StrokeThickness="0"
-                                        Padding="12,6"
-                                        VerticalOptions="Center">
+                Grid.Column="2"
+                BackgroundColor="{StaticResource Accent}"
+                StrokeThickness="0"
+                Padding="10,6"
+                VerticalOptions="Center">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="10" />
                                         </Border.StrokeShape>
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditWeightEntryCommand}"
-                                            CommandParameter="{Binding .}" />
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditWeightEntryCommand}"
+                        CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
-                                        <Label
-                                        Text="Edytuj"
-                                        FontSize="12"
-                                        FontAttributes="Bold"
-                                        TextColor="{StaticResource White}" />
+                                        <Label Text="Edytuj" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource White}" />
+                                    </Border>
+
+                                    <Border
+                Grid.Column="3"
+                BackgroundColor="Transparent"
+                Stroke="#C0392B"
+                StrokeThickness="1.5"
+                Padding="10,6"
+                VerticalOptions="Center">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10" />
+                                        </Border.StrokeShape>
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=DeleteWeightEntryCommand}"
+                        CommandParameter="{Binding .}" />
+                                        </Border.GestureRecognizers>
+                                        <Label Text="Usuń" FontSize="12" TextColor="#C0392B" />
                                     </Border>
 
                                 </Grid>
@@ -164,63 +176,75 @@
                     </CollectionView.EmptyView>
 
                     <CollectionView.ItemTemplate>
+                        <!-- NOTES ItemTemplate -->
                         <DataTemplate x:DataType="models:EntryNote">
                             <Border Style="{StaticResource DashboardCardStyle}">
 
-                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                                <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="6">
 
                                     <VerticalStackLayout Grid.Column="0" Spacing="4">
                                         <Label
-                        Text="{Binding Text}"
-                        Style="{StaticResource DashboardValueStyle}"
-                        LineBreakMode="TailTruncation"
-                        MaxLines="2" />
+                    Text="{Binding Text}"
+                    Style="{StaticResource DashboardValueStyle}"
+                    LineBreakMode="TailTruncation"
+                    MaxLines="2" />
 
                                         <Label
-                        Text="{Binding DateTime, StringFormat='{0:dd.MM.yyyy, HH:mm}'}"
-                        Style="{StaticResource DateLabelStyle}" />
+                    Text="{Binding DateTime, StringFormat='{0:dd.MM.yyyy, HH:mm}'}"
+                    Style="{StaticResource DateLabelStyle}" />
                                     </VerticalStackLayout>
 
                                     <Border
-                    Grid.Column="1"
-                    BackgroundColor="Transparent"
-                    Stroke="{StaticResource Accent}"
-                    StrokeThickness="1.5"
-                    Padding="12,6"
-                    VerticalOptions="Center">
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Stroke="{StaticResource Accent}"
+                StrokeThickness="1.5"
+                Padding="10,6"
+                VerticalOptions="Center">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="10" />
                                         </Border.StrokeShape>
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=ViewNoteDetailsCommand}"
-                            CommandParameter="{Binding .}" />
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=ViewNoteDetailsCommand}"
+                        CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
-                                        <Label
-                        Text="Szczegóły"
-                        FontSize="12"
-                        TextColor="{StaticResource Accent}" />
+                                        <Label Text="Szczegóły" FontSize="12" TextColor="{StaticResource Accent}" />
                                     </Border>
 
                                     <Border
-                    Grid.Column="2"
-                    BackgroundColor="{StaticResource Accent}"
-                    StrokeThickness="0"
-                    Padding="12,6"
-                    VerticalOptions="Center">
+                Grid.Column="2"
+                BackgroundColor="{StaticResource Accent}"
+                StrokeThickness="0"
+                Padding="10,6"
+                VerticalOptions="Center">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="10" />
                                         </Border.StrokeShape>
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditNoteEntryCommand}"
-                            CommandParameter="{Binding .}" />
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=EditNoteEntryCommand}"
+                        CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
-                                        <Label
-                        Text="Edytuj"
-                        FontSize="12"
-                        FontAttributes="Bold"
-                        TextColor="{StaticResource White}" />
+                                        <Label Text="Edytuj" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource White}" />
+                                    </Border>
+
+                                    <Border
+                Grid.Column="3"
+                BackgroundColor="Transparent"
+                Stroke="#C0392B"
+                StrokeThickness="1.5"
+                Padding="10,6"
+                VerticalOptions="Center">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10" />
+                                        </Border.StrokeShape>
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListPageViewModel}}, Path=DeleteNoteEntryCommand}"
+                        CommandParameter="{Binding .}" />
+                                        </Border.GestureRecognizers>
+                                        <Label Text="Usuń" FontSize="12" TextColor="#C0392B" />
                                     </Border>
 
                                 </Grid>

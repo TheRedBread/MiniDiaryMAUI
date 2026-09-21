@@ -104,4 +104,36 @@ public partial class ListPageViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync($"{nameof(DetailsPage)}?entryId={entryNote.Id}&entryMode=notes");
     }
+
+    [RelayCommand]
+    private async Task DeleteWeightEntry(EntryWeight entryWeight)
+    {
+        var confirmed = await Shell.Current.CurrentPage.DisplayAlert(
+            "Usuń wpis",
+            $"Usunąć wpis wagi {entryWeight.Weight} kg z {entryWeight.DateTime:dd.MM.yyyy}?",
+            "Usuń",
+            "Anuluj");
+
+        if (!confirmed)
+            return;
+
+        await _entriesService.DeleteWeightAsync(entryWeight);
+        ListWeights.Remove(entryWeight);
+    }
+
+    [RelayCommand]
+    private async Task DeleteNoteEntry(EntryNote entryNote)
+    {
+        var confirmed = await Shell.Current.CurrentPage.DisplayAlert(
+            "Usuń notatkę",
+            "Usunąć tę notatkę?",
+            "Usuń",
+            "Anuluj");
+
+        if (!confirmed)
+            return;
+
+        await _entriesService.DeleteNoteAsync(entryNote);
+        ListNotes.Remove(entryNote);
+    }
 }
