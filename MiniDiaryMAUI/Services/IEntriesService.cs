@@ -19,4 +19,7 @@ public interface IEntriesService
 
     Task<EntryNote?> InsertNoteAsync(EntryNote note);   
     Task<EntryWeight?> InsertWeightAsync(EntryWeight weight);
+
+    Task DeleteNoteAsync(EntryNote note);
+    Task DeleteWeightAsync(EntryWeight weight);
 }

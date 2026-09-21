@@ -79,4 +79,13 @@ public class EntriesService : IEntriesService
         await _database.InsertAsync(weight);
         return weight;
     }
+    public async Task DeleteNoteAsync(EntryNote note)
+    {
+        await _database.DeleteAsync(note);
+    }
+
+    public async Task DeleteWeightAsync(EntryWeight weight)
+    {
+        await _database.DeleteAsync(weight);
+    }
 }
